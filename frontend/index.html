@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Quote Generator</title>
+    <script type="module" src="main.mjs"></script>
+  </head>
+  <body>
+    <h1>Quote Generator</h1>
+
+    <div id="status" class="status" aria-live="polite"></div>
+
+    <blockquote>
+      <p id="quote"></p>
+      <footer id="author"></footer>
+    </blockquote>
+
+    <div>
+        <button id="random-quote" type="button">Random quote</button>
+        <label>
+          <input id="autoplay" type="checkbox" />
+          <span id="autoplay-status">Auto-play: OFF</span>
+        </label>
+      </div>
+
+    <div>
+      <button id="add-quote">Add Quote</button>
+    </div>
+    
+
+    <div id="hiddenDiv" style="display: none;">
+     <form id="quote-form">
+          <label>Quote
+            <textarea id="quote-input" required maxlength="500"></textarea>
+          </label>
+          <label>Author
+            <input id="author-input" required maxlength="100" />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+    </div>
+
+  </body>
+</html>
