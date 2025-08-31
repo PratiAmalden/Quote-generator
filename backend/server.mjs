@@ -5,13 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // middleware
-app.use(
-  cors({
-    origin: ["https://pratiamalden-quote.hosting.codeyourfuture.io"],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"]
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 // in-memory store
@@ -47,13 +41,13 @@ function randomQuote() {
   return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
-// API: GET /api returns a random quote
-app.get("/api", (req, res) => {
+// API: GET / returns a random quote
+app.get("/", (req, res) => {
   res.json(randomQuote());
 });
 
 // handle POST /api adds a new quotes
-app.post("/api", (req, res) => {
+app.post("/", (req, res) => {
   const body = req.body;
 
   if(typeof body !== "object" || !("quote" in body) || !("author" in body)){

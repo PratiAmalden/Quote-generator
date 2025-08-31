@@ -1,4 +1,4 @@
-const API = "https://pratiamalden-quote.hosting.codeyourfuture.io/api";
+const API = "https://pratiamalden-quote.hosting.codeyourfuture.io";
 
 const quote = document.getElementById("quote");
 const author = document.getElementById("author");
