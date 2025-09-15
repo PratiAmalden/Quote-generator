@@ -53,22 +53,27 @@ app.post("/", (req, res) => {
   if(typeof body !== "object" || !("quote" in body) || !("author" in body)){
     return res
       .status(400)
-      .send(
-        "Expected body to be a JSON object containing keys quote and author"
-      );
+      .json({ error: "Expected body to be a JSON object containing keys quote and author" });
   }
-  
-  const quote = body.quote.trim();
-  const author = body.author.trim();
+
+  const quote = body.quote;
+  const author = body.author;
 
   if(!quote || !author){
-    return res.status(400).send("Both quote and author must be non-empty strings!")
+    return res
+    .status(400)
+    .json({ error: "Both quote and author must be non-empty strings!" })
   }
 
-  const created = { quote, author };
-  quotes.push(created);
-  return res.status(201).send("ok");
+  const created = { quote: quote.trim(), author: author.trim() };
 
+  const isDuplicate = quotes.some(q => q.quote.toLowerCase() === created.quote.toLowerCase());
+  if(isDuplicate){
+    return res.status(400).json({ error: "This quote already exists." });
+  }
+
+  quotes.push(created);
+  return res.status(201).json(created);
 });
 
 app.listen(port, () => {
